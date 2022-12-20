@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: hello-flask
-        image: ghcr.io/kshitijchoudha/flask-k8s-mf-template:latest
+        image: ghcr.io/kshitijchoudha/xx-flask-demo-3:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3232

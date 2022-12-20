@@ -3,8 +3,8 @@ app = Flask(__name__)
 
 @app.route('/hello')
 def hello_world():
-    return 'Hello, k8s!!!'
+    return 'Hello, from xx-flask-demo-3!!'
 
 @app.route('/')
 def hello_root():
-    return 'Hello!'
+    return 'Hello! from xx-flask-demo-3!!'
