@@ -1,0 +1,47 @@
+pipeline:
+  name: xx-flask-demo-3-pipeline-1
+  identifier: xxflaskdemo3pipeline1
+  projectIdentifier: Default_Project_1671068007356
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: k8s-deploy
+        identifier: k8sdeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: xxflaskdemo3
+          environment:
+            environmentRef: xxflaskdemo3env1
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: xxflaskdemo3env1infradef1
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rollourDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+
